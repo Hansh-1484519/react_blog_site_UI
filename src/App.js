@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+//import Home form "./pages/home/Home";
+import TopBar from "./components/topbar/TopBar.jsx"
+//import Single from "./pages/single/Single.jsx";
+import Write from "./pages/write/Write.jsx";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TopBar/>
+      <Write/>
     </div>
   );
 }
