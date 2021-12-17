@@ -14,6 +14,7 @@ import {
 
 
 function App() {
+  const user = false;
   return (
     <Router>
       <TopBar />
@@ -21,18 +22,10 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/write">
-          <Write />
-        </Route>
-        <Route path="/setting">
-          <Setting />
-        </Route>
+        <Route path="/register">{user ? <Home /> :<Register />}</Route>
+        <Route path="/login">{ user ? <Home/> : <Login />}</Route>
+        <Route path="/write">{user ? <Write /> : <Register/>}</Route>
+        <Route path="/setting">{ user ? <Setting /> : <Register/>}</Route>
         <Route path="/Post/:postId">
           <Single />
         </Route>
