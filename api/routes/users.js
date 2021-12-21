@@ -28,7 +28,7 @@ router.put('/:id', async (req, res) => {
 
 });
 
-// Delete User 
+// Delete User ( this delete api can now delete any user but update it so that a person can delete himself only)
 router.delete('/:id', async (req, res) => {
         try{
             const user = await User.findById(req.params.id);
@@ -42,5 +42,16 @@ router.delete('/:id', async (req, res) => {
         } catch(err) { res.status(404).json("User not found");}
 
 });
+
+// Get User 
+router.get("/:id" , async (req , res) => {
+    try{
+        const user = await User.findById(req.params.id);
+        const {password, ...others} = user._doc;
+        res.status(200).json(others);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router
