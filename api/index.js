@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const authRoute = require("./routes/auth")
 const userRoute = require("./routes/users")
+const postRoute = require("./routes/posts")
 
 dotenv.config();
 app.use(express.json());
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
 
 // This is not good practice to write these operations urls inside the index.js file 
 
