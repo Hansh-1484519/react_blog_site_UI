@@ -14,7 +14,7 @@ router.post("/" , async ( req , res) => {
     }
 })
 
-// Update Posts
+// Update Post
 router.put("/:id", async (req , res) => {
     const post = await Post.findById(req.params.id);
     if( post.username === req.body.username){
@@ -35,6 +35,19 @@ router.put("/:id", async (req , res) => {
     }
 })
 
-// Delete User ( this delete api can now delete any user but update it so that a person can delete himself only)
+// Delete Post ( delete the post using id --- Note : a delete method can not have a message body)
+router.delete("/:id", async (req , res) => {
+    try{
 
+        const post = await Post.findById(req.params.id);
+            try{
+                await post.delete();
+                res.status(200).json("Post has been deleted");
+            } catch(err){
+                res.status(500).json(err);
+            }
+    } catch (err){
+        res.status(500).json(err);
+    }
+})
 module.exports = router
