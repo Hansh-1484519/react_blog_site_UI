@@ -1,25 +1,36 @@
 import "./post.css"
+import {Link} from "react-router-dom"
 
-const Post = () => {
+const Post = ({post}) => {
     return (
         <div className="post">
+            { post.photo && (
+                <img
+                    className="postImg"
+                    src = {post.photo} 
+                    alt="post loading" 
+                />
 
-            <img
-                className="postImg"
-                src="https://media.istockphoto.com/photos/social-media-and-digital-online-concept-woman-using-smartphone-picture-id1288271580?b=1&k=20&m=1288271580&s=170667a&w=0&h=T5tNQeD6dQ7o-PmpZR-ymGDSHvpyj-AEyeRuSNEWE8Q=" alt="post loading" />
+            )}
+
             <div className="postInfo">
                 <div className="postCats">
-                    <span className="postCat">Music</span>
-                    <span className="postCat">Life</span>
+                    { post.categories.map( (cat) => {
+                        <span className="postCat"> { cat.name} </span>
+                    })}
+                    
                 </div>
-                <span className="postTitle">Life without music is boring.</span>
+                <Link to = {`/post/${post._id}`} className = "link">
+                <span className="postTitle">{ post.title}</span>
+
+                </Link>
+
                 <hr />
-                <span className="postDate"> 1 hour ago </span>
+                <span className="postDate"> { new Date(post.createdAt).toDateString() } </span>
 
             </div>
-            <p  className="postDisc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam magni dolore laboriosam? Architecto exercitationem ullam vel, doloribus eum est a possimus delectus doloremque. Inventore dolores asperiores eveniet. Mollitia, quidem dicta!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam magni dolore laboriosam? Architecto exercitationem ullam vel, doloribus eum est a possimus delectus doloremque. Inventore dolores asperiores eveniet. Mollitia, quidem dicta!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam magni dolore laboriosam? Architecto exercitationem ullam vel, doloribus eum est a possimus delectus doloremque. Inventore dolores asperiores eveniet. Mollitia, quidem dicta!
+            <p  className="postDisc">
+            {post.desc}    
             </p>
 
 
