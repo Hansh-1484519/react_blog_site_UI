@@ -1,30 +1,51 @@
+import axios from "axios"
+import {useEffect , useState} from "react"
+import {useLocation} from "react-router"
 import "./singlePost.css"
 
 export default function SinglePost() {
+
+    const location = useLocation();
+   // console.log( location.pathname.split('/')[2] );
+    const path = location.pathname.split("/")[2];
+
+    // state hook
+    const [post , setPost] = useState({});
+
+    useEffect(() => {
+        const getpost = async () => {
+            const res = await axios.get("/posts/" + path);
+            //console.log(res);
+            setPost(res.data);
+        }
+        getpost();
+    }, [path]);
+
+
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-                <img className="singlePostImg"
-                    src="https://miro.medium.com/max/1200/1*xMuIOwjliGUPjkzukeWKfw.jpeg" alt="loading" />
+                {
+                    post.photo && (
+                        <img className="singlePostImg"
+                            src= { post.photo}
+                            alt="loading" />
+
+                    )
+                }
                 <h1 className="singlePostTitle">
-                    Beauty of nature is on it's peek
+                    { post.title }
                     <div className="singlePostEdit">
                         <i className="singlePostIcon far fa-edit"></i>
                         <i className="singlePostIcon far fa-trash-alt"></i>
                     </div>
                 </h1>
                 <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author: <b>Hansh Raj</b> </span>
-                    <span className="singlePostDate"> 1 hour ago</span>
+                    <span className="singlePostAuthor">Author: <b> {post.username} </b> </span>
+                    <span className="singlePostDate"> {new Date (post.createdAt).toDateString() } </span>
                 </div>
-                <p className="singlePostDesc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quia aspernatur labore blanditiis nostrum nobis sunt, illum quod esse officia non fugit accusamus voluptates facilis beatae? Illum fugit eligendi sit?
+                <p className="singlePostDesc">
+                    { post.desc }
                 </p>
             </div>
         </div>
