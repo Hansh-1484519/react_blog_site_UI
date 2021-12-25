@@ -33,7 +33,8 @@ export default function TopBar() {
                 { user ? (
                     <img 
                     className="topImg"
-                    src="https://thumbs.dreamstime.com/b/unemployed-man-scrolling-job-search-website-home-using-laptop-computer-unemployed-man-scrolling-job-search-website-home-203026878.jpg" alt="profile" />   
+                    src= { user.profilePic }
+                    alt="profile" />   
 
                 ) : (
                     <ul className = "topList">
