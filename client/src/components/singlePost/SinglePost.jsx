@@ -12,6 +12,8 @@ export default function SinglePost() {
 
     // state hook
     const [post , setPost] = useState({});
+    const PF = "http://localhost:5000/images/"
+
 
     useEffect(() => {
         const getpost = async () => {
@@ -29,7 +31,7 @@ export default function SinglePost() {
                 {
                     post.photo && (
                         <img className="singlePostImg"
-                            src= { post.photo}
+                            src= { PF + post.photo}
                             alt="loading" />
 
                     )
