@@ -1,7 +1,8 @@
 import axios from "axios"
-import {useEffect , useState} from "react"
+import {useContext, useEffect , useState} from "react"
 import {useLocation} from "react-router"
 import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 import "./singlePost.css"
 
 export default function SinglePost() {
@@ -12,7 +13,8 @@ export default function SinglePost() {
 
     // state hook
     const [post , setPost] = useState({});
-    const PF = "http://localhost:5000/images/"
+    const PF = "http://localhost:5000/images/";
+    const {user} = useContext(Context);
 
 
     useEffect(() => {
@@ -38,10 +40,12 @@ export default function SinglePost() {
                 }
                 <h1 className="singlePostTitle">
                     { post.title }
-                    <div className="singlePostEdit">
-                        <i className="singlePostIcon far fa-edit"></i>
-                        <i className="singlePostIcon far fa-trash-alt"></i>
-                    </div>
+                    {post.username === user?.username && (
+                        <div className="singlePostEdit">
+                            <i className="singlePostIcon far fa-edit"></i>
+                            <i className="singlePostIcon far fa-trash-alt"></i>
+                        </div>
+                    )}
                 </h1>
                 <div className="singlePostInfo">
                     <span className="singlePostAuthor">
