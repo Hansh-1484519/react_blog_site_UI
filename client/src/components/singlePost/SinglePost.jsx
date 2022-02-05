@@ -25,6 +25,17 @@ export default function SinglePost() {
         }
         getpost();
     }, [path]);
+    
+    const handleDelete = async ()=>{
+        try{
+            await axios.detete(`/posts/${post._id}`, {
+                data : {username : user.username},
+            });
+            window.location.replace("/");
+        }catch(err){
+            console.log(err);
+        }
+    }
 
 
     return (
@@ -43,7 +54,7 @@ export default function SinglePost() {
                     {post.username === user?.username && (
                         <div className="singlePostEdit">
                             <i className="singlePostIcon far fa-edit"></i>
-                            <i className="singlePostIcon far fa-trash-alt"></i>
+                            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
                         </div>
                     )}
                 </h1>
