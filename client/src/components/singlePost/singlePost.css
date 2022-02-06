@@ -21,6 +21,12 @@
     font-family: 'Comfortaa', cursive;
     font-size : 30px;
 }
+.singlePostTitleInput{
+    text-align : center;
+    margin : 10px;
+    font-family: 'Comfortaa', cursive;
+    font-size : 30px;
+}
 
 .singlePostEdit{
     float : right;
