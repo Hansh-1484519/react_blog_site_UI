@@ -24,6 +24,8 @@ export default function SinglePost() {
       const res = await axios.get("/posts/" + path);
       //console.log(res);
       setPost(res.data);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
     };
     getpost();
   }, [path]);
@@ -45,8 +47,13 @@ export default function SinglePost() {
         {post.photo && (
           <img className="singlePostImg" src={PF + post.photo} alt="loading" />
         )}
-        {    updatemode ? <input type="text" value={post.title} class="singlePostTitleInput"/> : (
-                <h1 className="singlePostTitle">
+        {   updatemode ? 
+            <input 
+            type="text" 
+            value={title} 
+            class="singlePostTitleInput"
+            autoFocus /> : (
+            <h1 className="singlePostTitle">
           {post.title}
           {post.username === user?.username && (
               <div className="singlePostEdit">
@@ -74,7 +81,7 @@ export default function SinglePost() {
             {new Date(post.createdAt).toDateString()}{" "}
           </span>
         </div>
-        { updatemode ? <input type="text" value={post.desc} /> : (
+        { updatemode ? <textarea className="singlePostDescInput" value = {desc}/>: (
             <p className="singlePostDesc">{post.desc}</p>
         )}
       </div>
