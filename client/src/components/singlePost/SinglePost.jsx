@@ -52,7 +52,9 @@ export default function SinglePost() {
             type="text" 
             value={title} 
             class="singlePostTitleInput"
-            autoFocus /> : (
+            autoFocus 
+            onChange={(e)=>setTitle(e.target.value)}
+            /> : (
             <h1 className="singlePostTitle">
           {post.title}
           {post.username === user?.username && (
@@ -81,7 +83,9 @@ export default function SinglePost() {
             {new Date(post.createdAt).toDateString()}{" "}
           </span>
         </div>
-        { updatemode ? <textarea className="singlePostDescInput" value = {desc}/>: (
+        { updatemode ? <textarea className="singlePostDescInput" value = {desc}
+         onChange={ (e) => { setDesc(e.target.value)}}
+        />: (
             <p className="singlePostDesc">{post.desc}</p>
         )}
       </div>
