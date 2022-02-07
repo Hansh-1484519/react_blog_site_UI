@@ -29,7 +29,7 @@ export default function Setting() {
             }
         }
         try{
-            await axios.put("/users"+user._id, updatedUser);
+            await axios.put("/users/"+user._id, updatedUser);
         } catch(err){
             console.log(err);
         }}
@@ -40,22 +40,29 @@ export default function Setting() {
                     <span className="settingUpdateTitle">Update Your Account</span>
                     <span className="settingDeleteTitle">Delete Account</span>
                 </div>
-                <form className="settingForm">
+                <form className="settingForm" onSubmit={handleSubmit}>
                     <label>Profile Picture</label>
                     <div className="settingPP">
-                        <img src={user.profilePic} alt="Profile" />
+                       { (file ?
+                        <img src = { URL.createObjectURL(file)} alt="Profile" /> : <img src = {user.profilePic} alt="pic"></img>
+                        )}
                     <label htmlFor="fileInput">
                     <i className="settingPPIcon far fa-user-circle"></i>
                     </label>
-                    <input type="file" id="fileInput" style={{display:"none"}}/>
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        style={{display:"none"}}  
+                        onChange = { (e) => setfile( e.target.files[0])}
+                    />
                     </div>
                     <label>Username</label>
-                    <input type="text" placeholder="Hansh"/>
+                    <input type="text" placeholder={user.username} onChange={e => setUsername(e.target.value)}/>
                     <label>Email</label>
-                    <input type="email" placeholder="hansh789@gmail.com"/>
+                    <input type="email" placeholder={user.email} onChange={e => setEmail(e.target.value)}/>
                     <label>Password</label>
-                    <input type="password"/>
-                    <button className="settingSubmit" onClick={handleSubmit}>Update</button>
+                    <input type="password" onChange = {e => setPassword(e.target.value)}/>
+                    <button className="settingSubmit" type="submit">Update</button>
                 </form>
 
             </div>
