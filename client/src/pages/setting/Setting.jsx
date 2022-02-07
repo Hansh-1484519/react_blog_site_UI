@@ -1,6 +1,9 @@
 import "./setting.css"
 import Sidebar from "../../components/sidebar/Sidebar"
+import { Context } from "../../context/Context"
+import { useContext } from "react"
 export default function Setting() {
+    const {user} = useContext(Context);
     return (
         <div className="setting">
             <div className="settingWrapper">
@@ -11,7 +14,7 @@ export default function Setting() {
                 <form className="settingForm">
                     <label>Profile Picture</label>
                     <div className="settingPP">
-                        <img src="https://thumbs.dreamstime.com/b/unemployed-man-scrolling-job-search-website-home-using-laptop-computer-unemployed-man-scrolling-job-search-website-home-203026878.jpg" alt="Profile" />
+                        <img src={user.profilePic} alt="Profile" />
                     <label htmlFor="fileInput">
                     <i className="settingPPIcon far fa-user-circle"></i>
                     </label>
