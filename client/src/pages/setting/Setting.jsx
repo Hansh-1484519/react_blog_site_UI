@@ -9,6 +9,7 @@ export default function Setting() {
     const [username , setUsername] = useState("");
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
+    const [success, setSuccess] = useState(false);
     const {user} = useContext(Context);
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +24,8 @@ export default function Setting() {
             data.append( "file" , file);
             updatedUser.profilePic = filename;
             try{
-                await axios.post("/upload" , data)
+                await axios.post("/upload" , data);
+                setSuccess(true);
             } catch ( err ) {
                 console.log(err);
             }
