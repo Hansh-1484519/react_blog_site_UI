@@ -25,13 +25,13 @@ export default function Setting() {
             updatedUser.profilePic = filename;
             try{
                 await axios.post("/upload" , data);
-                setSuccess(true);
             } catch ( err ) {
                 console.log(err);
             }
         }
         try{
             await axios.put("/users/"+ user._id, updatedUser);
+            setSuccess(true);
         } catch(err){
             console.log(err);
         }}
@@ -65,6 +65,7 @@ export default function Setting() {
                     <label>Password</label>
                     <input type="password" onChange = {e => setPassword(e.target.value)}/>
                     <button className="settingSubmit" type="submit">Update</button>
+                    {success && <span style={{color : "grey"}}>Profile has been updated....</span>}
                 </form>
 
             </div>
