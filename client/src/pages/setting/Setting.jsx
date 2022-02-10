@@ -29,7 +29,7 @@ export default function Setting() {
             }
         }
         try{
-            await axios.put("/users/"+user._id, updatedUser);
+            await axios.put("/users/"+ user._id, updatedUser);
         } catch(err){
             console.log(err);
         }}
