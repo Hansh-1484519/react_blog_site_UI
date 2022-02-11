@@ -45,9 +45,8 @@ export default function Setting() {
                 <form className="settingForm" onSubmit={handleSubmit}>
                     <label>Profile Picture</label>
                     <div className="settingPP">
-                       { (file ?
-                        <img src = { URL.createObjectURL(file)} alt="Profile" /> : <img src = {user.profilePic} alt="pic"></img>
-                        )}
+                       
+                        <img src = { file ? URL.createObjectURL(file)  : user.profilePic} alt="pic"/>
                     <label htmlFor="fileInput">
                     <i className="settingPPIcon far fa-user-circle"></i>
                     </label>
