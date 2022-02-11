@@ -65,7 +65,7 @@ export default function Setting() {
                     <label>Password</label>
                     <input type="password" onChange = {e => setPassword(e.target.value)}/>
                     <button className="settingSubmit" type="submit">Update</button>
-                    {success && <span style={{color : "grey"}}>Profile has been updated....</span>}
+                    {success && <span style={{color : "grey", textAlign : "center" , marginTop : "20px"}}>Profile has been updated....</span>}
                 </form>
 
             </div>
