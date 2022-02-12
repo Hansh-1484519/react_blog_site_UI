@@ -6,7 +6,7 @@ import "./sidebar.css"
 export default function Sidebar() {
 
     const [ cats , setCats] = useState([]);
-    
+
     useEffect(() => {
             const getCats = async () =>{
             const res = await axios.get('/categories');
@@ -14,7 +14,7 @@ export default function Sidebar() {
             setCats( res.data );
         }
         getCats();
-    })
+    },[])
 
 
     return (
