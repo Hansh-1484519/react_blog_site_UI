@@ -14,7 +14,7 @@ export default function Setting() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedUser = {
-            userId : user._id,
+            userid : user._id,
             username,email,password
         }
         if( file ){
@@ -30,6 +30,7 @@ export default function Setting() {
             }
         }
         try{
+            console.log("requested");
             await axios.put("/users/"+ user._id, updatedUser);
             setSuccess(true);
         } catch(err){
