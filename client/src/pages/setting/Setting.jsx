@@ -10,9 +10,13 @@ export default function Setting() {
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
     const [success, setSuccess] = useState(false);
-    const {user} = useContext(Context);
+    const {user, dispatch} = useContext(Context);
+    const PF = "http://localhost:5000/images/"
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch({type : "UPDATE_START"})
         const updatedUser = {
             userid : user._id,
             username,email,password
@@ -31,10 +35,11 @@ export default function Setting() {
         }
         try{
             console.log("requested");
-            await axios.put("/users/"+ user._id, updatedUser);
+            const res = await axios.put("/users/"+ user._id, updatedUser);
             setSuccess(true);
+            dispatch({type : "UPDATE_SUCCESS", payload: res.data })
         } catch(err){
-            console.log(err);
+            dispatch({type : "UPDATE_FAILURE"})
         }}
     return (
         <div className="setting">
@@ -47,7 +52,7 @@ export default function Setting() {
                     <label>Profile Picture</label>
                     <div className="settingPP">
                        
-                        <img src = { file ? URL.createObjectURL(file)  : user.profilePic} alt="pic"/>
+                        <img src = { file ? URL.createObjectURL(file)  : PF+user.profilePic} alt="pic"/>
                     <label htmlFor="fileInput">
                     <i className="settingPPIcon far fa-user-circle"></i>
                     </label>
