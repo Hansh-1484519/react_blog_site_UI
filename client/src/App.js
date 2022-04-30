@@ -5,6 +5,7 @@ import Register from "./pages/register/Register.jsx";
 import Setting from "./pages/setting/Setting.jsx";
 import Single from "./pages/single/Single.jsx";
 import Write from "./pages/write/Write.jsx";
+import About from "./pages/about/About.jsx";
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path={"/about"}>{user ? <About/> : <Home/>}</Route>
         <Route path="/register">{user ? <Home /> :<Register />}</Route>
         <Route path="/login">{ user ? <Home/> : <Login />}</Route>
         <Route path="/write">{user ? <Write /> : <Register/>}</Route>
